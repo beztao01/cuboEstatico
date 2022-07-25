@@ -21,29 +21,32 @@
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
+
+        const light = new THREE.PointLight( 0x404040, 50, 100 );
+        light.position.set( 50, 50, 50 );
+        scene.add( light )
         
         const geometry = new THREE.BoxGeometry( 1, 1, 1, );
         
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const material = new THREE.MeshStandardMaterial( { color: 0x888888 } );
         const cube = new THREE.Mesh( geometry, material );
         scene.add ( cube );
 
         const size = 10;
         const divisions = 10;
-
         const gridHelper = new THREE.GridHelper( size, divisions );
+      scene.add ( gridHelper);
 
-        scene.add ( gridHelper);
-
-        camera.position.z = 5;
-        camera.position.y = 3;
+        camera.position.z = 7;
+        camera.position.y = 2.5;
         cube.position.y = 0.5;
+        cube.rotation.y = 1;
 
         function animate() {
             requestAnimationFrame( animate );
 
-            //cube.rotation.x += 0.01;
-            //cube.rotation.y += 0.01;
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
 
             renderer.render( scene, camera );
         };
